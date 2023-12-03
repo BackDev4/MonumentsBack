@@ -3,6 +3,7 @@
 use App\Http\Middleware\Authenticate;
 use App\Monuments\Contacts\Controllers\Admin\ContactController;
 use App\Monuments\Gallery\Controllers\Admin\GalleryController;
+use App\Monuments\Reviews\Controllers\Admin\ReviewsController;
 use App\Monuments\Services\Controllers\Admin\ServicesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -50,5 +51,12 @@ Route::middleware(Authenticate::class)
             Route::get('/{id}', [GalleryController::class, 'show'])->name('show');
             Route::put('/{id}', [GalleryController::class, 'update'])->name('update');
             Route::delete('/{id}', [GalleryController::class, 'delete'])->name('delete');
+        });
+        Route::name('reviews.')->prefix('reviews')->group(function () {
+            Route::get('/', [ReviewsController::class, 'index'])->name('index');
+            Route::post('/', [ReviewsController::class, 'store'])->name('store');
+            Route::get('/{id}', [ReviewsController::class, 'show'])->name('show');
+            Route::put('/{id}', [ReviewsController::class, 'update'])->name('update');
+            Route::delete('/{id}', [ReviewsController::class, 'delete'])->name('delete');
         });
     });

@@ -5,6 +5,8 @@ namespace App\Monuments\Services\Repositories;
 use App\Monuments\Services\DTOs\ServicesDTO;
 use App\Monuments\Services\Interface\ServicesInterface;
 use App\Monuments\Services\Models\Services;
+use Illuminate\Support\Facades\Storage;
+use Mockery\Exception;
 
 class ServicesRepository implements ServicesInterface
 {
@@ -17,11 +19,12 @@ class ServicesRepository implements ServicesInterface
 
     public function create(ServicesDTO $DTO)
     {
+        $imagePath = $this->uploadPhoto(request('image'));
         $services = new Services();
         $services->fill([
             'title' => $DTO->title,
             'content' => $DTO->content,
-            'image' => '',
+            'image' => $imagePath,
         ]);
         $services->save();
     }
@@ -44,4 +47,13 @@ class ServicesRepository implements ServicesInterface
     {
         return Services::destroy($id);
     }
+
+    private function uploadPhoto($image)
+    {
+        $filename =  uniqid() . '.' . $image->getClientOriginalExtension();
+        $imagePath = asset('/storage/' . $image->storeAs('services', $filename, 'public'));
+
+        return $imagePath;
+    }
+
 }

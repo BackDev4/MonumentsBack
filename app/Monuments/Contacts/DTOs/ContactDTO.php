@@ -4,12 +4,15 @@ namespace App\Monuments\Contacts\DTOs;
 
 class ContactDTO
 {
-    public string $phone;
+    public string $type;
+    public string $data;
 
     public function __construct(
-        string $phone
+        string $type,
+        string $data
     )
     {
-        $this->phone = $phone;
+        $this->type = $type;
+        $this->data = $data;
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Monuments\Services\DTOs;
 
+use Illuminate\Http\UploadedFile;
+
 class ServicesDTO
 {
 

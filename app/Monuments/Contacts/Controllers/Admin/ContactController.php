@@ -46,8 +46,7 @@ class ContactController extends Controller
     public function update(ContactRequest $request, $id)
     {
         try {
-            $contact = Contact::find($id);
-            $this->repository->update($request->toDto(),$contact);
+            $this->repository->update($request->toDto(),$id);
             alert()->success('Success', 'Успешно обновлено');
             return redirect()->back();
         } catch (\Throwable $th) {

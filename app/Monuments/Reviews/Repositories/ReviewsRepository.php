@@ -5,6 +5,7 @@ namespace App\Monuments\Reviews\Repositories;
 use App\Monuments\Reviews\DTOs\ReviewsDTO;
 use App\Monuments\Reviews\Interface\ReviewsInterface;
 use App\Monuments\Reviews\Models\Reviews;
+use Mockery\Exception;
 
 class ReviewsRepository implements ReviewsInterface
 {
@@ -26,7 +27,7 @@ class ReviewsRepository implements ReviewsInterface
 
     public function update(ReviewsDTO $DTO, $id)
     {
-        $reviews = Reviews::findOrFail($id);
+        $reviews = Reviews::where('id', request('id'))->first();
         $reviews->fill([
             'name' => $DTO->name,
             'content' => $DTO->content,

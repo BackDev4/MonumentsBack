@@ -10,7 +10,8 @@ class Contact extends Model
     protected $guarded = ['id'];
 
     protected $fillable = [
-        'phone'
+        'type',
+        'data',
     ];
 
 }

@@ -33,7 +33,6 @@ class ServicesController extends Controller
             alert()->error('Error', 'Произошла ошибка: ' . $th->getMessage());
             return back()->withErrors(['error' => $th->getMessage()])->withInput();
         }
-
     }
 
     public function show($id)

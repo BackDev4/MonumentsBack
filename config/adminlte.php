@@ -312,7 +312,7 @@ return [
         ],
         [
             'text' => 'Отзывы',
-            'url'  => 'admin/contact',
+            'url'  => 'admin/reviews',
         ],
         [
             'text' => 'Услуги',

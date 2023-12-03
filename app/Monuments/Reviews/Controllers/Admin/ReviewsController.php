@@ -17,8 +17,8 @@ class ReviewsController
 
     public function index()
     {
-        $contact = $this->repository->index();
-        return view('admin.contact', compact('contact'));
+        $reviews = $this->repository->index();
+        return view('admin.reviews', compact('reviews'));
     }
 
     public function store(ReviewsRequest $request)

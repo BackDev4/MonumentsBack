@@ -16,10 +16,17 @@
                 <form action="{{route('admin.contact.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <div class="col-md-6">Телефон</div>
+                        <div class="col-md-6">Тип</div>
                         <label class="col-md-6">
-                            <input class="form-control" type="text" name="phone"
-                                   placeholder="Enter phone">
+                            <input class="form-control" type="text" name="type"
+                                   placeholder="Enter type">
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">Данные</div>
+                        <label class="col-md-6">
+                            <input class="form-control" type="text" name="data"
+                                   placeholder="Enter data">
                         </label>
                     </div>
                     <div class="d-flex justify-content-end">
@@ -36,7 +43,8 @@
     @php
         $heads = [
             'id',
-            'Телефон',
+            'Тип',
+            'Данные',
       ];
     @endphp
 
@@ -46,7 +54,8 @@
             @foreach($contact as $con)
                 <tr>
                     <td>{{$con->id}}</td>
-                    <td>{{$con->phone}}</td>
+                    <td>{{$con->type}}</td>
+                    <td>{{$con->data}}</td>
                     <td>
                         <x-adminlte-button theme="primary" data-toggle="modal" data-target="#modalEdit{{$con->id}}"
                                            icon="fa fa-lg fa-fw fa-pen"></x-adminlte-button>
@@ -64,8 +73,12 @@
                         <div class="col-md-6">{{$con->id}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">Телефон</div>
-                        <div class="col-md-6">{{$con->phone}}</div>
+                        <div class="col-md-6">Тип</div>
+                        <div class="col-md-6">{{$con->type}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">Данные</div>
+                        <div class="col-md-6">{{$con->data}}</div>
                     </div>
                     <x-slot name="footerSlot"></x-slot>
                 </x-adminlte-modal>
@@ -90,10 +103,17 @@
                         @csrf
                         @method('PUT')
                         <div class="row">
-                            <div class="col-md-6">Телефон</div>
+                            <div class="col-md-6">Тип</div>
                             <label class="col-md-6">
-                                <input class="form-control" type="text" name="phone"
-                                       placeholder="Enter phone" value="{{$con->phone}}">
+                                <input class="form-control" type="text" name="type"
+                                       placeholder="Enter type" value="{{$con->type}}">
+                            </label>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">Данные</div>
+                            <label class="col-md-6">
+                                <input class="form-control" type="text" name="data"
+                                       placeholder="Enter data" value="{{$con->data}}">
                             </label>
                         </div>
                         <div class="d-flex justify-content-end">

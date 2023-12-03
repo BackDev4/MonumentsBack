@@ -18,7 +18,8 @@ class ContactRepository implements ContactInterface
     {
         $contact = new Contact();
         $contact->fill([
-            'phone' => $DTO->phone
+            'type' => $DTO->type,
+            'data' => $DTO->data,
         ]);
         $contact->save();
     }
@@ -30,8 +31,11 @@ class ContactRepository implements ContactInterface
 
     public function update(ContactDTO $DTO, $id)
     {
-        $contact = Contact::findOrFail($id);
-        $contact->phone = $DTO->phone;
+        $contact = Contact::where('id', request('id'))->first();
+        $contact->fill([
+            'type' => $DTO->type,
+            'data' => $DTO->data,
+        ]);
         $contact->save();
     }
 
