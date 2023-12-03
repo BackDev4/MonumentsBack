@@ -32,6 +32,9 @@ class ReviewsRequest extends FormRequest
     {
         $validated = $this->validated();
 
-        return new ReviewsDTO(...array_values($validated));
+        return new ReviewsDTO(
+            $validated['name'],
+            $validated['content'],
+        );
     }
 }

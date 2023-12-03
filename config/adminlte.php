@@ -311,11 +311,15 @@ return [
             'url'  => 'admin/contact',
         ],
         [
+            'text' => 'Отзывы',
+            'url'  => 'admin/contact',
+        ],
+        [
             'text' => 'Услуги',
             'url'  => 'admin/services',
         ],
         [
-            'text' => 'Галерея',
+            'text' => 'Примеры работ',
             'url'  => 'admin/gallery',
         ],
     ],

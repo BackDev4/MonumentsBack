@@ -21,6 +21,7 @@ class ServicesRepository implements ServicesInterface
         $services->fill([
             'title' => $DTO->title,
             'content' => $DTO->content,
+            'image' => '',
         ]);
         $services->save();
     }
@@ -30,11 +31,13 @@ class ServicesRepository implements ServicesInterface
         return Services::find($id);
     }
 
-    public function update(ServicesDTO $DTO,$id)
+    public function update(ServicesDTO $DTO, $id)
     {
-        $services = Services::find($id);
-        $services->phone = $DTO->phone;
-        $services->save();
+        Services::where('id', $id)->update([
+            'title' => $DTO->title,
+            'content' => $DTO->content,
+            'updated_at' => now(),
+        ]);
     }
 
     public function delete($id)

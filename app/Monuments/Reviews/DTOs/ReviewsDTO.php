@@ -9,8 +9,8 @@ class ReviewsDTO
     public string $content;
 
     public function __construct(
-        $name,
-        $content,
+        string $name,
+        string $content
     )
     {
         $this->name = $name;

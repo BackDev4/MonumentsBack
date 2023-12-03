@@ -14,13 +14,14 @@ class ReviewsRepository implements ReviewsInterface
         return Reviews::paginate(9);
     }
 
-    public function create(ReviewsDTO $DTO)
+    public function store(ReviewsDTO $DTO)
     {
         $reviews = new Reviews();
         $reviews->fill([
             'name' => $DTO->name,
             'content' => $DTO->content,
         ]);
+        $reviews->save();
     }
 
     public function update(ReviewsDTO $DTO, $id)
