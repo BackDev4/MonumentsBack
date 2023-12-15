@@ -43,8 +43,8 @@ class ServicesController extends Controller
     public function update(ServicesRequest $request, $id)
     {
         try {
-            $contact = Services::find($id);
-            $this->repository->update($request->toDto(), $contact);
+            $services = Services::find($id);
+            $this->repository->update($request->toDto(), $services);
             alert()->success('Success', 'Успешно обновлено');
             return redirect()->back();
         } catch (\Throwable $th) {

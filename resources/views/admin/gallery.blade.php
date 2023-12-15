@@ -25,7 +25,7 @@
                     <div class="row">
                         <div class="col-md-6">Картинка</div>
                         <label class="col-md-6">
-                            <input type="file" name="image" class="form-control-file">
+                            <input type="file" name="image" class="form-control">
                         </label>
                     </div>
                     <div class="d-flex justify-content-end">
@@ -49,12 +49,11 @@
 
 
     <x-adminlte-datatable id="table1" :heads="$heads" striped hoverable compressed beautify>
-        {{--        @if($contact)--}}
         @foreach($gallery as $gal)
             <tr>
                 <td>{{$gal->id}}</td>
                 <td>{{$gal->title}}</td>
-                <td><img src="{{$gal->image}}" alt="not found"></td>
+                <td><img src="{{$gal->image}}" width="150px" alt="not found"></td>
                 <td>
                     <x-adminlte-button theme="primary" data-toggle="modal" data-target="#modalEdit{{$gal->id}}"
                                        icon="fa fa-lg fa-fw fa-pen"></x-adminlte-button>
@@ -111,7 +110,7 @@
                     <div class="row">
                         <div class="col-md-6">Картинка</div>
                         <label class="col-md-6">
-                            <input type="file" name="image" class="form-control-file">
+                            <input type="file" name="image" class="form-control">
                         </label>
                     </div>
                     <div class="d-flex justify-content-end">
@@ -121,7 +120,7 @@
                 </form>
             </x-adminlte-modal>
         @endforeach
-        {{--        @endif--}}
     </x-adminlte-datatable>
+    {{$gallery->links('pagination::bootstrap-4')}}
 @endsection
 

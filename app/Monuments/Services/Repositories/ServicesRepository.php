@@ -5,8 +5,7 @@ namespace App\Monuments\Services\Repositories;
 use App\Monuments\Services\DTOs\ServicesDTO;
 use App\Monuments\Services\Interface\ServicesInterface;
 use App\Monuments\Services\Models\Services;
-use Illuminate\Support\Facades\Storage;
-use Mockery\Exception;
+use Carbon\Carbon;
 
 class ServicesRepository implements ServicesInterface
 {
@@ -36,11 +35,17 @@ class ServicesRepository implements ServicesInterface
 
     public function update(ServicesDTO $DTO, $id)
     {
-        Services::where('id', $id)->update([
-            'title' => $DTO->title,
-            'content' => $DTO->content,
-            'updated_at' => now(),
-        ]);
+        $service = Services::where('id',$id)->get();
+
+        if (request()->hasFile('file')) {
+            $imagePath = $this->uploadPhoto(request('file'));
+            $service->image = $imagePath;
+        }
+
+        $service->title = $DTO->title;
+        $service->content = $DTO->content;
+
+        $service->save();
     }
 
     public function delete($id)
@@ -50,7 +55,7 @@ class ServicesRepository implements ServicesInterface
 
     private function uploadPhoto($image)
     {
-        $filename =  uniqid() . '.' . $image->getClientOriginalExtension();
+        $filename = uniqid() . '.' . $image->getClientOriginalExtension();
         $imagePath = asset('/storage/' . $image->storeAs('services', $filename, 'public'));
 
         return $imagePath;

@@ -17,10 +17,12 @@
                     @csrf
                     <div class="row">
                         <div class="col-md-6">Тип</div>
-                        <label class="col-md-6">
-                            <input class="form-control" type="text" name="type"
-                                   placeholder="Enter type">
-                        </label>
+                        <div class="col-md-6">
+                        <select class="form-control" name="type" v-model="selectedType">
+                            <option value="phone">Телефон</option>
+                            <option value="email">Email</option>
+                        </select>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">Данные</div>
