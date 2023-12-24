@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Monuments\Gallery\Requests\GalleryRequest;
 use App\Monuments\Gallery\Models\Gallery;
 use App\Monuments\Gallery\Repositories\GalleryRepository;
-Use RealRashid\SweetAlert\Facades\Alert;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class GalleryController extends Controller
@@ -35,7 +35,6 @@ class GalleryController extends Controller
             alert()->error('Error', 'Произошла ошибка: ' . $th->getMessage());
             return back()->withErrors(['error' => $th->getMessage()])->withInput();
         }
-
     }
 
     public function show($id)
@@ -47,7 +46,7 @@ class GalleryController extends Controller
     {
         try {
             $gallery = Gallery::find($id);
-            $this->repository->update($request->toDto(),$gallery);
+            $this->repository->update($request->toDto(), $gallery);
             alert()->success('Success', 'Успешно обновлено');
             return redirect()->back();
         } catch (\Throwable $th) {
@@ -67,5 +66,4 @@ class GalleryController extends Controller
             return back()->withErrors(['error' => $th->getMessage()])->withInput();
         }
     }
-
 }

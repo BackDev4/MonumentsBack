@@ -88,9 +88,10 @@
                     <form action="{{ route('admin.services.delete', ['id' => $gal->id]) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <x-adminlte-button theme="success" type="submit" label="Yes"/>
+                        <input type="hidden" name="id" value="{{$gal->id}}">
+                        <x-adminlte-button theme="success" type="submit" label="Да"/>
                     </form>
-                    <x-adminlte-button label="No" data-dismiss="modal" theme="danger"/>
+                    <x-adminlte-button label="Нет" data-dismiss="modal" theme="danger"/>
                 </x-slot>
             </x-adminlte-modal>
             <x-adminlte-modal theme="primary" icon="fa fa-lg fa-fw fa-pen" id="modalEdit{{$gal->id}}"

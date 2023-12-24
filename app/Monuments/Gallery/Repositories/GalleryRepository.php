@@ -35,9 +35,7 @@ class GalleryRepository implements GalleryInterface
 
     public function update(GalleryDTO $DTO, $id)
     {
-        if (request('file')) {
-            $imagePath = $this->uploadPhoto(request('file'));
-        }
+        $imagePath = $this->uploadPhoto(request('file'));
         Gallery::where('id', $id)->update([
             'title' => $DTO->title,
             'image' => $imagePath,
@@ -47,7 +45,8 @@ class GalleryRepository implements GalleryInterface
 
     public function delete($id)
     {
-        return Gallery::destroy($id);
+        $gallery = Gallery::findOrFail($id);
+        return $gallery->delete($id);
     }
 
     private function uploadPhoto($image)

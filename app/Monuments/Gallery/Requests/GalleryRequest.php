@@ -23,7 +23,8 @@ class GalleryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'phone' => 'required'
+            'title' => 'required',
+            'image' => 'required',
         ];
     }
 

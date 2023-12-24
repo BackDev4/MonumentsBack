@@ -26,7 +26,7 @@ class ServicesRequest extends FormRequest
         return [
             'title' => 'sometimes|required',
             'content' => 'sometimes|required',
-            'image' => 'sometimes|required',
+            'image',
         ];
     }
 
@@ -35,9 +35,9 @@ class ServicesRequest extends FormRequest
         $validated = $this->validated();
 
         return new ServicesDTO(
-            $validated['title'] ?? '',
-            $validated['content'] ?? '',
-            $validated['image'] ?? '',
+            $validated['title'],
+            $validated['content'],
+            $validated['image'] ?? "",
         );
     }
 

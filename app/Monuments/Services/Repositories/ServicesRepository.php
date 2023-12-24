@@ -35,17 +35,17 @@ class ServicesRepository implements ServicesInterface
 
     public function update(ServicesDTO $DTO, $id)
     {
-        $service = Services::where('id',$id)->get();
+        $service = Services::find($id)->first();
 
-        if (request()->hasFile('file')) {
+        if (request('file')) {
             $imagePath = $this->uploadPhoto(request('file'));
             $service->image = $imagePath;
         }
 
         $service->title = $DTO->title;
         $service->content = $DTO->content;
-
         $service->save();
+        return response()->json($service);
     }
 
     public function delete($id)
@@ -60,5 +60,4 @@ class ServicesRepository implements ServicesInterface
 
         return $imagePath;
     }
-
 }
