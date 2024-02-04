@@ -39,14 +39,12 @@ class GalleryRepository implements GalleryInterface
         Gallery::where('id', $id)->update([
             'title' => $DTO->title,
             'image' => $imagePath,
-            'updated_at' => now(),
         ]);
     }
 
     public function delete($id)
     {
-        $gallery = Gallery::findOrFail($id);
-        return $gallery->delete($id);
+        Gallery::destroy($id);
     }
 
     private function uploadPhoto($image)
