@@ -1,8 +1,14 @@
 steps:
-- name: 'gcr.io/cloud-builders/composer:latest'
+# Установка зависимостей с помощью Composer (для PHP проектов)
+- name: 'gcr.io/cloud-builders/composer'
   args: ['install', '--ignore-platform-reqs']
+
+# Сборка и кэширование конфигурации Laravel (для Laravel проектов)
 - name: 'gcr.io/cloud-builders/php'
   args: ['artisan', 'config:cache']
+
+# Развертывание приложения на Google App Engine
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['app', 'deploy']
+
 timeout: '1600s'
