@@ -1,0 +1,8 @@
+steps:
+- name: 'gcr.io/cloud-builders/composer'
+  args: ['install', '--ignore-platform-reqs']
+- name: 'gcr.io/cloud-builders/php'
+  args: ['artisan', 'config:cache']
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['app', 'deploy']
+timeout: '1600s'
