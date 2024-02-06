@@ -15,6 +15,3 @@ env_variables:
   DB_USERNAME: postgres
   DB_PASSWORD: 20050404iliA
   
-
-beta_settings:
-  cloud_sql_instances: YOUR_PROJECT_ID:REGION:INSTANCE_NAME
