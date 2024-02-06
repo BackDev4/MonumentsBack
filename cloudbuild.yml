@@ -1,7 +1,6 @@
 steps:
 - name: 'gcr.io/cloud-builders/composer'
   args: ['install', '--ignore-platform-reqs']
-  entrypoint: 'composer:2.6.6'
 - name: 'gcr.io/cloud-builders/php'
   args: ['artisan', 'config:cache']
 - name: 'gcr.io/cloud-builders/gcloud'
