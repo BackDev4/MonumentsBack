@@ -1,5 +1,5 @@
 steps:
-- name: 'gcr.io/cloud-builders/composer'
+- name: 'gcr.io/cloud-builders/composer:latest'
   args: ['install', '--ignore-platform-reqs']
 - name: 'gcr.io/cloud-builders/php'
   args: ['artisan', 'config:cache']
