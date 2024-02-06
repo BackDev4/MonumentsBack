@@ -2,7 +2,7 @@ steps:
 # Установка зависимостей с помощью Composer (для PHP проектов)
 - name: 'gcr.io/cloud-builders/composer'
   args: ['install', '--ignore-platform-reqs']
-  endpoint:"composer:2.6.6"
+  entrypoint: "composer:2.6.6"
 # Сборка и кэширование конфигурации Laravel (для Laravel проектов)
 - name: 'gcr.io/cloud-builders/php'
   args: ['artisan', 'config:cache']
