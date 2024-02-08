@@ -2,7 +2,6 @@ FROM php:8.3-fpm-alpine
 
 # Установка зависимостей
 RUN apk add --no-cache nginx wget
-RUN apk add --no-cache php8.3-fpm
 
 # Копирование конфигурации Nginx
 COPY nginx.conf /etc/nginx/nginx.conf
@@ -16,6 +15,7 @@ RUN wget http://getcomposer.org/composer.phar && \
 WORKDIR /app
 COPY . /app
 RUN composer install --no-dev
+RUN apk add --no-cache php8.3-fpm
 
 # Назначение прав пользователю www-data
 RUN chown -R www-data: /app
