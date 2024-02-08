@@ -15,9 +15,8 @@ RUN wget http://getcomposer.org/composer.phar && \
 WORKDIR /app
 COPY . /app
 RUN composer install --no-dev
-RUN apk add --no-cache php8.3-fpm
 
 # Назначение прав пользователю www-data
 RUN chown -R www-data: /app
 # Запуск Nginx и PHP-FPM
-CMD nginx && php-fpm
+CMD nginx && php artisan serve --port=9000
