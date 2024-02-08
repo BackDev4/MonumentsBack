@@ -16,14 +16,6 @@ WORKDIR /app
 COPY . /app
 RUN composer install --no-dev
 
-RUN php artisan key:generate
-
-RUN php artisan optimize:clear
-
-RUN php artisan storage:link
-
-RUN php artisan migrate
-
 # Назначение прав пользователю www-data
 RUN chown -R www-data: /app
 # Запуск Nginx и PHP-FPM
