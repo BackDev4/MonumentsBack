@@ -19,4 +19,4 @@ RUN composer install --no-dev
 # Назначение прав пользователю www-data
 RUN chown -R www-data: /app
 # Запуск Nginx и PHP-FPM
-CMD nginx && php artisan serve --port=9000
+CMD nginx && php-fpm
