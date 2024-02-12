@@ -6,7 +6,9 @@ RUN apk add --no-cache nginx wget
 # Копирование конфигурации Nginx
 COPY nginx.conf /etc/nginx/nginx.conf
 
-RUN docker-php-ext-install pdo pdo_pgsql pgsql
+RUN docker-php-ext-install pdo
+RUN docker-php-ext-install pdo_pgsql
+RUN docker-php-ext-install pgsql
 
 # Установка Composer
 RUN wget http://getcomposer.org/composer.phar && \
