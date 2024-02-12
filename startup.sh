@@ -17,6 +17,8 @@ sed -i "s/DB_DATABASE=your_database/DB_DATABASE=monuments/" /app/.env
 sed -i "s/DB_USERNAME=your_username/DB_USERNAME=postgres/" /app/.env
 sed -i "s/DB_PASSWORD=your_password/DB_PASSWORD=20050404iliA/" /app/.env
 
+php artisan migrate --seed
+
 # Установка правильных разрешений для каталога storage
 chmod -R 777 /app/storage
 
