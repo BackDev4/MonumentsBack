@@ -18,8 +18,5 @@ RUN composer install --no-dev
 
 # Назначение прав пользователю www-data
 RUN chown -R www-data: /app
-
-# Запуск PHP-FPM
-CMD php-fpm -D && \
-    echo "PHP-FPM started and listening on port 9000" && \
-    nginx -g 'daemon off;'
+# Запуск Nginx и PHP-FPM
+CMD nginx && php-fpm
