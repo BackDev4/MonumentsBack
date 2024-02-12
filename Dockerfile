@@ -1,10 +1,9 @@
 FROM php:8.3-fpm-alpine
 
-# Установка зависимостей
-RUN apk add --no-cache nginx wget
+RUN apk add --no-cache nginx wget postgresql-dev
 
-# Копирование конфигурации Nginx
-COPY nginx.conf /etc/nginx/nginx.conf
+# Установка драйвера PDO для PostgreSQL и расширения pgsql
+RUN docker-php-ext-install pdo pdo_pgsql pgsql
 
 # Установка Composer
 RUN wget http://getcomposer.org/composer.phar && \
