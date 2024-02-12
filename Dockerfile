@@ -19,4 +19,6 @@ RUN composer install --no-dev
 # Назначение прав пользователю www-data
 RUN chown -R www-data: /app
 # Запуск Nginx и PHP-FPM
-CMD nginx && php-fpm
+
+CMD sh /app/startup.sh
+
