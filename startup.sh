@@ -6,6 +6,8 @@ sed -i "s,LISTEN_PORT,$PORT,g" /etc/nginx/nginx.conf
 # Генерация файла .env
 cp /app/.env.example /app/.env
 
+./cloud_sql_proxy -dir=/cloudsql &
+
 # Генерация ключа приложения Laravel
 php artisan key:generate
 
@@ -19,9 +21,6 @@ sed -i "s/DB_PASSWORD=your_password/DB_PASSWORD=20050404iliA/" /app/.env
 
 php artisan migrate
 php artisan adminlte:install
-
-# Запуск Cloud SQL Proxy
-./cloud_sql_proxy -dir=/cloudsql &
 
 # Установка правильных разрешений для каталога storage
 chmod -R 777 /app/storage
