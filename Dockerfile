@@ -14,17 +14,17 @@ RUN wget http://getcomposer.org/composer.phar && \
     chmod a+x composer.phar && \
     mv composer.phar /usr/local/bin/composer
 
+# Установка Cloud SQL Proxy
+RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /usr/local/bin/cloud_sql_proxy && \
+    chmod +x /usr/local/bin/cloud_sql_proxy
+
 # Перемещение в директорию приложения и установка зависимостей Composer
 WORKDIR /app
 COPY . /app
 RUN composer install --no-dev
-# Установка Cloud SQL Proxy
-RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
-RUN chmod +x cloud_sql_proxy
-
 
 # Назначение прав пользователю www-data
 RUN chown -R www-data: /app
 
-# Запуск Nginx и PHP-FPM
+# Запуск Cloud SQL Proxy и PHP-FPM
 CMD sh /app/startup.sh
