@@ -7,7 +7,7 @@ sed -i "s,LISTEN_PORT,$PORT,g" /etc/nginx/nginx.conf
 cp /app/.env.example /app/.env
 
 # Запуск Cloud SQL Proxy
-/cloud_sql_proxy -dir=/cloudsql -instances=steel-sonar-413417:us-central1:data-base-monument &
+/usr/local/bin/cloud_sql_proxy -dir=/cloudsql -instances=steel-sonar-413417:us-central1:data-base-monument &
 
 # Генерация ключа приложения Laravel
 php artisan key:generate
