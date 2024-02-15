@@ -19,6 +19,7 @@ sed -i "s/DB_PORT=3306/DB_PORT=5432/" /app/.env
 sed -i "s/DB_DATABASE=your_database/DB_DATABASE=monuments/" /app/.env
 sed -i "s/DB_USERNAME=your_username/DB_USERNAME=postgres/" /app/.env
 sed -i "s/DB_PASSWORD=your_password/DB_PASSWORD=20050404iliA/" /app/.env
+
 cat /app/.env
 
 php artisan migrate
