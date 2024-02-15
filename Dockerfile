@@ -12,8 +12,8 @@ RUN wget http://getcomposer.org/composer.phar && \
     mv composer.phar /usr/local/bin/composer
 
 # Install Cloud SQL Proxy
-RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /usr/local/bin/cloud_sql_proxy && \
-    chmod +x /usr/local/bin/cloud_sql_proxy
+# RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /usr/local/bin/cloud_sql_proxy && \
+#     chmod +x /usr/local/bin/cloud_sql_proxy
 
 # Copy Nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
@@ -29,7 +29,7 @@ RUN composer install --no-dev
 RUN chown -R www-data: /app
 
 # Stop any existing Cloud SQL Proxy instances before running a new one
-RUN pkill cloud_sql_proxy || true
+# RUN pkill cloud_sql_proxy || true
 
 # Run startup script
 CMD sh /app/startup.sh
