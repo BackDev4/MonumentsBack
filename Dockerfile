@@ -28,5 +28,8 @@ RUN composer install --no-dev
 # Set permissions for user www-data
 RUN chown -R www-data: /app
 
+# Stop any existing Cloud SQL Proxy instances before running a new one
+RUN pkill cloud_sql_proxy || true
+
 # Run startup script
 CMD sh /app/startup.sh
