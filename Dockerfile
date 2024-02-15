@@ -28,5 +28,5 @@ RUN composer install --no-dev
 # Set permissions for user www-data
 RUN chown -R www-data: /app
 
-# Start Cloud SQL Proxy and PHP-FPM
+# Run startup script
 CMD sh /app/startup.sh
