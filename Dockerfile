@@ -18,6 +18,10 @@ RUN wget http://getcomposer.org/composer.phar && \
 WORKDIR /app
 COPY . /app
 RUN composer install --no-dev
+# Установка Cloud SQL Proxy
+RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
+RUN chmod +x cloud_sql_proxy
+
 
 # Назначение прав пользователю www-data
 RUN chown -R www-data: /app
