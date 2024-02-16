@@ -23,7 +23,9 @@ sed -i "s/DB_PASSWORD=/DB_PASSWORD=20050404iliA/" /app/.env
 cat /app/.env
 
 php artisan migrate
+
 php artisan db:seed
+
 php artisan adminlte:install
 
 # Установка правильных разрешений для каталога storage
