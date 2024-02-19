@@ -11,9 +11,7 @@ class ServicesRepository implements ServicesInterface
 
     public function index()
     {
-        $perPage = 6;
-        $page = request('page', 1);
-        return Services::paginate($perPage, ['*'], 'page', $page);
+        return Services::paginate(6);
     }
 
     public function create(ServicesDTO $DTO)
