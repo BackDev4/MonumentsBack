@@ -26,6 +26,8 @@ composer update
 
 php artisan migrate
 
+php artisan storage:link
+
 # php artisan db:seed
 
 php artisan adminlte:install
