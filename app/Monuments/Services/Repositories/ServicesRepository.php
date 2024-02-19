@@ -5,15 +5,14 @@ namespace App\Monuments\Services\Repositories;
 use App\Monuments\Services\DTOs\ServicesDTO;
 use App\Monuments\Services\Interface\ServicesInterface;
 use App\Monuments\Services\Models\Services;
-use Carbon\Carbon;
 
 class ServicesRepository implements ServicesInterface
 {
 
-
     public function index()
     {
-        return Services::paginate(6);
+        $page = request('page', 1);
+        return Services::paginate(6, ['*'], 'page', $page);
     }
 
     public function create(ServicesDTO $DTO)
