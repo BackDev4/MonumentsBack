@@ -11,7 +11,7 @@ class ServicesRepository implements ServicesInterface
 
     public function index()
     {
-        return Services::all();
+        return Services::paginate(9);
     }
 
     public function create(ServicesDTO $DTO)
