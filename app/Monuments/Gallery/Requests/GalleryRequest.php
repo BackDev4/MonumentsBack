@@ -24,7 +24,7 @@ class GalleryRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'image' => 'required',
+            'image' => 'image',
         ];
     }
 

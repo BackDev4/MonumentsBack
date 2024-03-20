@@ -24,8 +24,8 @@ class ServicesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'sometimes|required',
-            'content' => 'sometimes|required',
+            'title',
+            'content',
             'image',
         ];
     }
