@@ -9,17 +9,17 @@ apk add --no-cache postgresql
 /etc/init.d/postgresql start
 
 # Создание каталога для данных PostgreSQL
-mkdir -p /var/lib/postgresql/data
+mkdir -p /var/lib/postgresql/13/data
 
-# Инициализация кластера базы данных PostgreSQL
-su postgres -c "initdb -D /var/lib/postgresql/data"
+# Установка переменной среды PGDATA
+export PGDATA="/var/lib/postgresql/13/data"
 
-# Запуск сервера PostgreSQL
-/etc/init.d/postgresql start
+# Инициализация каталога базы данных PostgreSQL
+su postgres -c "/usr/bin/initdb -D $PGDATA"
 
 # Изменение конфигурации PostgreSQL для принятия внешних подключений
-su postgres -c "sed -i 's/#listen_addresses = 'localhost'/listen_addresses = '*'/g' /var/lib/postgresql/data/postgresql.conf"
-echo 'host    all             all             0.0.0.0/0               md5' | su postgres -c "tee -a /var/lib/postgresql/data/pg_hba.conf"
+su postgres -c "sed -i 's/#listen_addresses = 'localhost'/listen_addresses = '*'/g' $PGDATA/postgresql.conf"
+echo 'host    all             all             0.0.0.0/0               md5' | su postgres -c "tee -a $PGDATA/pg_hba.conf"
 su postgres -c "/etc/init.d/postgresql reload"
 
 # Создание базы данных и пользователя PostgreSQL
