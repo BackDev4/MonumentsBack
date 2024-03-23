@@ -8,6 +8,9 @@ apk add --no-cache postgresql
 /etc/init.d/postgresql setup
 /etc/init.d/postgresql start
 
+# Установка переменной среды PGDATA
+export PGDATA="/var/lib/postgresql/data"
+
 # Изменение конфигурации PostgreSQL для принятия внешних подключений
 su postgres -c "sed -i 's/#listen_addresses = 'localhost'/listen_addresses = '*'/g' /etc/postgresql/postgresql.conf"
 echo 'host    all             all             0.0.0.0/0               md5' | su postgres -c "tee -a /var/lib/postgresql/data/pg_hba.conf"
