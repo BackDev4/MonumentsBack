@@ -26,7 +26,7 @@ class ServicesRequest extends FormRequest
         return [
             'title',
             'content',
-            'image',
+            'image' => 'image',
         ];
     }
 
