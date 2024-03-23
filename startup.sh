@@ -8,6 +8,9 @@ apk add --no-cache postgresql
 /etc/init.d/postgresql setup
 /etc/init.d/postgresql start
 
+# Создание каталога для данных PostgreSQL
+mkdir -p /var/lib/postgresql/data
+
 # Установка переменной среды PGDATA
 export PGDATA="/var/lib/postgresql/data"
 
