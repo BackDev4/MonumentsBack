@@ -1,28 +1,23 @@
 FROM php:8.1-fpm-alpine
 
-# Install dependencies
-RUN apk add --no-cache nginx wget postgresql-dev
+RUN apk add --no-cache nginx wget postgresql-dev autoconf g++ make
 
-# Install PHP extensions for PostgreSQL
-RUN docker-php-ext-install pdo_pgsql pgsql
+RUN docker-php-ext-install pdo_pgsql && \
+    pecl install redis && \
+    docker-php-ext-enable redis
 
-# Install Composer
 RUN wget http://getcomposer.org/composer.phar && \
     chmod a+x composer.phar && \
     mv composer.phar /usr/local/bin/composer
 
-# Copy Nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# Set working directory and copy application files
 WORKDIR /app
-COPY . /app
+COPY . .
 
-# Install Composer dependencies
+COPY startup.sh /startup.sh
+RUN chmod +x /startup.sh
+
 RUN composer install --no-dev
 
-# Set permissions for user www-data
-RUN chown -R www-data: /app
-
-# Run startup script
-CMD sh /app/startup.sh
+CMD ["sh", "/startup.sh"]
