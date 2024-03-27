@@ -13,21 +13,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Build and run multi-container app with docker-compose
+        run: |
+          docker-compose up --build -d
 
       - name: Аутентификация в Google Cloud и загрузка образов Docker в GCR
         run: |
           echo "${{ secrets.GCP_SA_KEY }}" | base64 -d > key.json &&
           gcloud auth activate-service-account --key-file=key.json &&
-          gcloud auth configure-docker
-
-      - name: Build and run multi-container app with docker-compose
-        run: |
-          docker-compose up --build -d
-
-      - name: Push
-        run: |
+          gcloud auth configure-docker &&
           docker-compose push
-
 
       - name: Deploy to Cloud Run
         run: |
