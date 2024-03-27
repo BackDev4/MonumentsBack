@@ -16,20 +16,16 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-      - name: Authenticate with Google Cloud
-        uses: google-github-actions/auth@v0.7.0
-        with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
-
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: gcr.io/steel-sonar-413417/monuments-backend:latest
+          tags: us-central1-docker.pkg.dev/steel-sonar-413417/cloud-run-source-deploy/monuments-backend:latest
 
       - name: Deploy to Cloud Run
         run: |
+          gcloud auth configure-docker
           docker-compose up -d
-          gcloud run deploy backend --image=gcr.io/steel-sonar-413417/monuments-backend:latest --platform=managed --region=us-central-1 --allow-unauthenticated
+          gcloud run deploy backend --image=us-central1-docker.pkg.dev/steel-sonar-413417/cloud-run-source-deploy/monuments-backend:latest --platform=managed --region=us-central1 --allow-unauthenticated
