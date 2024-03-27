@@ -1,4 +1,4 @@
-name: Deploy to Google Cloud Run via Docker Compose
+name: Deploy to Google Cloud Run via CI/CD
 
 on:
   push:
@@ -13,26 +13,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+      # Шаг сборки и запуска мультиконтейнерного приложения с помощью docker-compose
+      - name: Build and run multi-container app with docker-compose
+        run: |
+          docker-compose up --build -d
 
-      - name: Authenticate with Google Cloud
-        uses: google-github-actions/auth@v0.7.0
-        with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
+      # Шаг аутентификации в Google Cloud и загрузки образов в Container Registry
+      - name: Authenticate with Google Cloud and push Docker images to GCR
+        run: |
+          echo ${{ secrets.GCP_SA_KEY }} > key.json
+          gcloud auth activate-service-account --key-file=key.json
+          gcloud auth configure-docker
+          docker-compose push
 
-      - name: Authenticate to Google Cloud
-        run: gcloud auth configure-docker
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: us-central1-docker.pkg.dev/steel-sonar-413417/backend:latest
-          remove-tag: us-central1-docker.pkg.dev/steel-sonar-413417/backend:latest
-
+      # Шаг развертывания приложения на Cloud Run
       - name: Deploy to Cloud Run
         run: |
-          gcloud run deploy backend --image=us-central1-docker.pkg.dev/steel-sonar-413417/backend:latest --platform=managed --region=us-central1 --allow-unauthenticated --quiet
+          gcloud run deploy backend --image=gcr.io/steel-sonar-413417/backend:latest --platform=managed --region=us-central1 --allow-unauthenticated --quiet
