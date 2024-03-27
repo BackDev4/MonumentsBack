@@ -13,6 +13,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Configure gcloud SDK
+        uses: google-github-actions/setup-gcloud@v0.4.0
+        with:
+          project_id: steel-sonar-413417
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      - name: Log in to gcloud
+        run: gcloud auth login
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
@@ -26,6 +36,5 @@ jobs:
 
       - name: Deploy to Cloud Run
         run: |
-          gcloud auth configure-docker
           docker-compose up -d
           gcloud run deploy backend --image=gcr.io/steel-sonar-413417/monuments-backend:latest --platform=managed --region=us-central-1 --allow-unauthenticated
