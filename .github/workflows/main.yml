@@ -19,9 +19,9 @@ jobs:
 
       - name: Аутентификация в Google Cloud и загрузка образов Docker в GCR
         run: |
-          echo '${{ secrets.GCP_SA_KEY }}' | base64 -d > key.json
-          gcloud auth activate-service-account --key-file=key.json
-          gcloud auth configure-docker
+          echo "${{ secrets.GCP_SA_KEY }}" | base64 -d > key.json &&
+          gcloud auth activate-service-account --key-file=key.json &&
+          gcloud auth configure-docker &&
           docker-compose push
 
       - name: Deploy to Cloud Run
