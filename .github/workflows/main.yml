@@ -34,6 +34,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: us-central1-docker.pkg.dev/steel-sonar-413417/backend:latest
+          remove-tag: us-central1-docker.pkg.dev/steel-sonar-413417/backend:latest
 
       - name: Deploy to Cloud Run
         run: |
