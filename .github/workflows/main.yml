@@ -26,4 +26,4 @@ jobs:
 
       - name: Deploy to Cloud Run
         run: |
-          gcloud run deploy backend --image=gcr.io/steel-sonar-413417/backend:latest --platform=managed --region=us-central1 --allow-unauthenticated --quiet
+          gcloud run deploy backend --image=gcr.io/steel-sonar-413417/backend:latest --platform=managed --region=us-central1 --allow-unauthenticated --quiet --project=steel-sonar-413417
