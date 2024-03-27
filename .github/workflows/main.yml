@@ -34,4 +34,4 @@ jobs:
 
       - name: Deploy to Cloud Run
         run: |
-          gcloud run deploy backend --image=us-central1-docker.pkg.dev/steel-sonar-413417/backend:latest --platform=managed --region=us-central1 --allow-unauthenticated
+          gcloud run deploy backend --image=us-central1-docker.pkg.dev/steel-sonar-413417/backend:latest --platform=managed --region=us-central1 --allow-unauthenticated --quiet
