@@ -17,7 +17,7 @@ jobs:
         run: |
           docker-compose up --build -d
 
-      - name: Аутентификация в Google Cloud и загрузка образов Docker в GCR
+      - name: Authenticate with Google Cloud and PUSH
         run: |
           echo "${{ secrets.GCP_SA_KEY }}" | base64 -d > key.json &&
           gcloud auth activate-service-account --key-file=key.json &&
