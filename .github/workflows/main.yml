@@ -24,7 +24,7 @@ jobs:
 
       - name: Push
         run: |
-          docker-compose push
+          GOOGLE_APPLICATION_CREDENTIALS=/home/runner/work/MonumentsBack/MonumentsBack/gha-creds-1988b6f4134c5e01.json docker-compose push
 
       - name: Deploy to Cloud Run
         run: |

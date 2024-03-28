@@ -10,6 +10,7 @@ services:
             - redis
             - postgres
         environment:
+            - GOOGLE_APPLICATION_CREDENTIALS=/home/runner/work/MonumentsBack/MonumentsBack/gha-creds-1988b6f4134c5e01.json
             - DATABASE_URL=pgsql://postgres:20050404iliA@postgres/monuments
             - REDIS_HOST=redis
         volumes:
