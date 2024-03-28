@@ -27,7 +27,6 @@ jobs:
       - name: Build and run multi-container app with docker-compose
         run: |
           export GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS_PATH
-          docker-compose up --build -d
         env:
           GOOGLE_APPLICATION_CREDENTIALS_PATH: ${{ steps.set_creds_path.outputs.GOOGLE_APPLICATION_CREDENTIALS_PATH }}
 
