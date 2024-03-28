@@ -32,10 +32,10 @@ jobs:
 
       - name: Tag Docker images
         run: |
-          docker tag postgres:latest gcr.io/steel-sonar-413417/postgres:latest
+          docker tag  gcr.io/steel-sonar-413417/postgres:latest gcr.io/steel-sonar-413417/postgres:latest
           docker push gcr.io/steel-sonar-413417/postgres:latest
 
-          docker tag redis:latest gcr.io/steel-sonar-413417/redis:latest
+          docker tag  gcr.io/steel-sonar-413417/redis:latest gcr.io/steel-sonar-413417/redis:latest
           docker push gcr.io/steel-sonar-413417/redis:latest
 
           docker tag gcr.io/steel-sonar-413417/backend:latest gcr.io/steel-sonar-413417/backend:latest
