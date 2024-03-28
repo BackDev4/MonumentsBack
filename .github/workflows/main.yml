@@ -27,25 +27,24 @@ jobs:
       - name: Build Docker images
         run: |
           docker-compose -f docker-compose.yml build
-          docker images
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
 
-      - name: Tag Docker images
+      - name: Configure Docker for Google Cloud authentication
         run: |
-          docker tag  gcr.io/steel-sonar-413417/postgres:latest gcr.io/steel-sonar-413417/postgres:latest
+          gcloud auth configure-docker
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
+
+      - name: Tag and push Docker images
+        run: |
+          docker tag gcr.io/steel-sonar-413417/postgres:latest gcr.io/steel-sonar-413417/postgres:latest
           docker push gcr.io/steel-sonar-413417/postgres:latest
 
-          docker tag  gcr.io/steel-sonar-413417/redis:latest gcr.io/steel-sonar-413417/redis:latest
+          docker tag gcr.io/steel-sonar-413417/redis:latest gcr.io/steel-sonar-413417/redis:latest
           docker push gcr.io/steel-sonar-413417/redis:latest
 
           docker tag gcr.io/steel-sonar-413417/backend:latest gcr.io/steel-sonar-413417/backend:latest
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
-
-      - name: Configure Docker for Google Cloud authentication and push
-        run: |
-          gcloud auth configure-docker
           docker push gcr.io/steel-sonar-413417/backend:latest
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
