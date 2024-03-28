@@ -32,7 +32,7 @@ jobs:
 
       - name: Tag Docker images
         run: |
-          docker tag backend:latest gcr.io/steel-sonar-413417/backend:latest
+          docker tag gcr.io/steel-sonar-413417/backend:latest gcr.io/steel-sonar-413417/backend:latest
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
 
