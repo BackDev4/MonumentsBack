@@ -1,4 +1,4 @@
-name: Deploy to Google Cloud Run via CI/CD
+name: Deploy to Google Cloud via CI/CD
 
 on:
   push:
@@ -24,16 +24,34 @@ jobs:
         run: echo "::set-output name=GOOGLE_APPLICATION_CREDENTIALS_PATH::${{ steps.auth.outputs.credentials_file_path }}"
         id: set_creds_path
 
-      - name: Build and push Docker images
+      - name: Build Docker images
         run: |
-          export GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS_PATH
-          docker-compose build
-          docker-compose push
+          docker-compose -f docker-compose.yml build
         env:
-          GOOGLE_APPLICATION_CREDENTIALS_PATH: ${{ steps.set_creds_path.outputs.GOOGLE_APPLICATION_CREDENTIALS_PATH }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
 
-      - name: Deploy to Cloud Run
+      - name: Tag Docker images
         run: |
-          gcloud run deploy backend --image=gcr.io/steel-sonar-413417/backend:latest --platform=managed --region=us-central1 --allow-unauthenticated --quiet --project=steel-sonar-413417
+          docker tag your_image_name:latest gcr.io/steel-sonar-413417/backend:latest
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.set_creds_path.outputs.GOOGLE_APPLICATION_CREDENTIALS_PATH }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
+
+      - name: Configure Docker for Google Cloud authentication and push
+        run: |
+          gcloud auth configure-docker
+          docker push gcr.io/steel-sonar-413417/backend:latest
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
+
+      - name: Install Helm
+        run: |
+          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+          chmod +x get_helm.sh
+          ./get_helm.sh
+
+      - name: Deploy to Google Kubernetes Engine
+        run: |
+          gcloud container clusters get-credentials autopilot-cluster-1 --zone=us-central1
+          helm upgrade --install backend charts/backend
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
