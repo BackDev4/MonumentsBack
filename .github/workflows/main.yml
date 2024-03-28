@@ -36,6 +36,9 @@ jobs:
         run: |
           export GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS_PATH
           docker-compose push
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS_PATH: ${{ steps.set_creds_path.outputs.GOOGLE_APPLICATION_CREDENTIALS_PATH }}
+
 
       - name: Deploy to Cloud Run
         run: |
