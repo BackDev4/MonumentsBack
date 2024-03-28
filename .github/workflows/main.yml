@@ -24,19 +24,10 @@ jobs:
         run: echo "::set-output name=GOOGLE_APPLICATION_CREDENTIALS_PATH::${{ steps.auth.outputs.credentials_file_path }}"
         id: set_creds_path
 
-      - name: Build and run multi-container app with docker-compose
+      - name: Build and push Docker images
         run: |
           export GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS_PATH
-          docker-compose up --build -d
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS_PATH: ${{ steps.set_creds_path.outputs.GOOGLE_APPLICATION_CREDENTIALS_PATH }}
-
-      - name: Configure Docker for Google Cloud authentication and push
-        run: |
-          gcloud auth configure-docker
-          gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS_PATH
-          gcloud auth print-access-token
-          export GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS_PATH
+          docker-compose build
           docker-compose push
         env:
           GOOGLE_APPLICATION_CREDENTIALS_PATH: ${{ steps.set_creds_path.outputs.GOOGLE_APPLICATION_CREDENTIALS_PATH }}
@@ -44,3 +35,5 @@ jobs:
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy backend --image=gcr.io/steel-sonar-413417/backend:latest --platform=managed --region=us-central1 --allow-unauthenticated --quiet --project=steel-sonar-413417
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.set_creds_path.outputs.GOOGLE_APPLICATION_CREDENTIALS_PATH }}

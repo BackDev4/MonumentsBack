@@ -1,21 +1,18 @@
+version: '3.8'
+
 services:
-    backend:
+    app:
         build:
             context: .
             dockerfile: Dockerfile
-        image: us-central1-docker.pkg.dev/steel-sonar-413417/backend:latest
-        ports:
-            - "80:80"
-        depends_on:
-            - redis
-            - postgres
+        image: gcr.io/steel-sonar-413417/backend:latest
         environment:
-            - GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS_PATH}
             - DATABASE_URL=pgsql://postgres:20050404iliA@postgres/monuments
             - REDIS_HOST=redis
+        ports:
+            - "80:80"
         volumes:
             - .:/app
-
 
     postgres:
         image: postgres
