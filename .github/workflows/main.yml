@@ -18,14 +18,11 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
           export_environment_variables: true
-          id: auth
+        id: auth
+
       - name: Get credentials file path
         run: echo "::set-output name=GOOGLE_APPLICATION_CREDENTIALS_PATH::${{ steps.auth.outputs.credentials_file_path }}"
         id: get_path
-
-      - name: Build and run multi-container app with docker-compose
-        run: |
-          docker-compose up --build -d
 
       - name: Push
         run: |
