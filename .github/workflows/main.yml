@@ -20,6 +20,10 @@ jobs:
           export_environment_variables: true
           id: auth
 
+      - name: Получить путь к файлу с учетными данными
+        id: get_path
+        run: echo "::set-output name=GOOGLE_APPLICATION_CREDENTIALS_PATH::${{ steps.auth.outputs.credentials_file_path }}"
+
       - name: Print credentials file path
         run:
           echo " "Credentials file path:" . ${{ steps.auth.outputs.credentials_file_path }}"
