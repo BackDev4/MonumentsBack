@@ -22,7 +22,7 @@ jobs:
 
       - name: Print credentials file path
         run:
-          echo "Credentials file path: . ${{ steps.auth.outputs.credentials_file_path }}"
+          echo " "Credentials file path:" . ${{ steps.auth.outputs.credentials_file_path }}"
 
       - name: Build and run multi-container app with docker-compose
         run: |
