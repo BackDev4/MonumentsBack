@@ -20,9 +20,9 @@ jobs:
           export_environment_variables: true
           id: auth
 
-      - name: Получить путь к файлу с учетными данными
-        id: get_path
+      - name: Установить путь к файлу с учетными данными
         run: echo "::set-output name=GOOGLE_APPLICATION_CREDENTIALS_PATH::${{ steps.auth.outputs.credentials_file_path }}"
+        id: set_creds_path
 
       - name: Print credentials file path
         run:
@@ -34,8 +34,9 @@ jobs:
 
       - name: Push
         run: |
-          echo "GOOGLE_APPLICATION_CREDENTIALS_PATH: $GOOGLE_APPLICATION_CREDENTIALS_PATH"
           GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS_PATH docker-compose push
+        env:
+          CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE: ${{ steps.set_creds_path.outputs.GOOGLE_APPLICATION_CREDENTIALS_PATH }}
 
       - name: Deploy to Cloud Run
         run: |
