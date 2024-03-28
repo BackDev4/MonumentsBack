@@ -31,7 +31,6 @@ jobs:
         env:
           GOOGLE_APPLICATION_CREDENTIALS_PATH: ${{ steps.set_creds_path.outputs.GOOGLE_APPLICATION_CREDENTIALS_PATH }}
 
-
       - name: Configure Docker for Google Cloud authentication and push
         run: |
           gcloud auth configure-docker
