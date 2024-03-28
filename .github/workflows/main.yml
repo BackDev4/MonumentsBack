@@ -24,9 +24,8 @@ jobs:
         run: echo "::set-output name=GOOGLE_APPLICATION_CREDENTIALS_PATH::${{ steps.auth.outputs.credentials_file_path }}"
         id: set_creds_path
 
-      - name: Print credentials file path
-        run:
-          echo " "Credentials file path:" . ${{ steps.auth.outputs.credentials_file_path }}"
+      - name: Настройка Docker для аутентификации в Google Cloud
+        run: gcloud auth configure-docker
 
       - name: Build and run multi-container app with docker-compose
         run: |
