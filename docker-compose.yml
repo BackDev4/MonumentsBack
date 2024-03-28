@@ -13,7 +13,6 @@ services:
             - GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS_PATH
             - DATABASE_URL=pgsql://postgres:20050404iliA@postgres/monuments
             - REDIS_HOST=redis
-            - GOOGLE_APPLICATION_CREDENTIALS_PATH=$GOOGLE_APPLICATION_CREDENTIALS_PATH
         volumes:
             - .:/app
 
