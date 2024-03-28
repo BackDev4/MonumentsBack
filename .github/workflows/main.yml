@@ -43,15 +43,8 @@ jobs:
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
 
-      - name: Install Helm
+      - name: Deploy to Google Cloud Run
         run: |
-          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-          chmod +x get_helm.sh
-          ./get_helm.sh
-
-      - name: Deploy to Google Kubernetes Engine
-        run: |
-          gcloud container clusters get-credentials autopilot-cluster-1 --zone=us-central1
-          helm upgrade --install backend charts/backend
+          gcloud run deploy backend --image=gcr.io/steel-sonar-413417/backend:latest --platform=managed --region=us-central1 --allow-unauthenticated --project=steel-sonar-413417
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
