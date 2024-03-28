@@ -33,10 +33,10 @@ jobs:
 
       - name: Manual Authentication Check
         run: |
-          gcloud auth activate-service-account --key-file=[PATH_TO_JSON_KEY_FILE]
+          gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS_PATH
           gcloud auth print-access-token
         env:
-          PATH_TO_JSON_KEY_FILE: ${{ steps.set_creds_path.outputs.GOOGLE_APPLICATION_CREDENTIALS_PATH }}
+          GOOGLE_APPLICATION_CREDENTIALS_PATH: ${{ steps.set_creds_path.outputs.GOOGLE_APPLICATION_CREDENTIALS_PATH }}
 
       - name: Push to Google Container Registry
         run: |
