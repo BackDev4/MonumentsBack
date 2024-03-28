@@ -26,7 +26,7 @@ jobs:
 
       - name: Print credentials file path
         run:
-          echo "GOOGLE_APPLICATION_CREDENTIALS_PATH: ${{ steps.get_path.outputs.GOOGLE_APPLICATION_CREDENTIALS_PATH }}"
+          echo "${{ steps.get_path.outputs.GOOGLE_APPLICATION_CREDENTIALS_PATH }}"
 
       - name: Build and run multi-container app with docker-compose
         run: |
