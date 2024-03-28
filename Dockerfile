@@ -1,4 +1,5 @@
 FROM php:8.1-fpm-alpine
+CMD echo "GOOGLE_APPLICATION_CREDENTIALS is set to: $GOOGLE_APPLICATION_CREDENTIALS" && your_command_to_start_the_application
 
 RUN apk add --no-cache nginx wget postgresql-dev autoconf g++ make
 
