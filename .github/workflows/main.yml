@@ -21,7 +21,9 @@ jobs:
         run: |
           echo "${{ secrets.GCP_SA_KEY }}" | base64 -d > key.json &&
           gcloud auth activate-service-account --key-file=key.json &&
-          gcloud auth configure-docker &&
+          gcloud auth configure-docker
+      - name: Push
+        run: |
           docker-compose push
 
       - name: Deploy to Cloud Run
