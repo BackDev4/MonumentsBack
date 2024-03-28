@@ -35,6 +35,7 @@ jobs:
         run: |
           gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS_PATH
           gcloud auth print-access-token
+          export GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS_PATH
           docker-compose push
         env:
           GOOGLE_APPLICATION_CREDENTIALS_PATH: ${{ steps.set_creds_path.outputs.GOOGLE_APPLICATION_CREDENTIALS_PATH }}
