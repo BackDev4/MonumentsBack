@@ -38,9 +38,21 @@ jobs:
           gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS_PATH
           gcloud auth print-access-token
           export GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS_PATH
-          docker-compose push
         env:
           GOOGLE_APPLICATION_CREDENTIALS_PATH: ${{ steps.set_creds_path.outputs.GOOGLE_APPLICATION_CREDENTIALS_PATH }}
+
+      - name: Push backend service to Container Registry
+        run: |
+          docker-compose build backend
+          docker-compose push backend
+      - name: Push postgres service to Container Registry
+        run: |
+          docker-compose build postgres
+          docker-compose push postgres
+      - name: Push redis service to Container Registry
+        run: |
+          docker-compose build redis
+          docker-compose push redis
 
       - name: Deploy to Cloud Run
         run: |
