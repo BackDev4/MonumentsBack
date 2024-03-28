@@ -20,6 +20,6 @@ RUN chmod +x /startup.sh
 
 RUN composer install --no-dev
 
-CMD echo "GOOGLE_APPLICATION_CREDENTIALS is set to: $GOOGLE_APPLICATION_CREDENTIALS"
+RUN echo "GOOGLE_APPLICATION_CREDENTIALS is set to: $GOOGLE_APPLICATION_CREDENTIALS"
 
 CMD ["sh", "/startup.sh"]
