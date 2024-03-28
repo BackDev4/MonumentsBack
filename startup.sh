@@ -1,5 +1,7 @@
 #!/bin/sh
 
+cp /app/.env.example /app/.env
+
 php artisan key:generate
 
 echo "DB_CONNECTION=pgsql" >> /app/.env
