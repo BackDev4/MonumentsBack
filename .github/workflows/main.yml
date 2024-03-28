@@ -44,6 +44,9 @@ jobs:
         run: |
           docker-compose build backend
           docker-compose push backend
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS_PATH: ${{ steps.set_creds_path.outputs.GOOGLE_APPLICATION_CREDENTIALS_PATH }}
+
       - name: Push postgres service to Container Registry
         run: |
           docker-compose build postgres
