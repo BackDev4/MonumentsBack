@@ -1,78 +1,45 @@
 apiVersion: apps/v1
-kind: List
-items:
-  - apiVersion: apps/v1
-    kind: Deployment
+kind: Deployment
+metadata:
+  name: multi-container-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: multi-container-app
+  template:
     metadata:
-      name: backend
-      spec:
-        replicas: 1
-        selector:
-          matchLabels:
-            app: backend
-        template:
-          metadata:
-            labels:
-              app: backend
-          spec:
-            containers:
-              - name: backend
-                image: gcr.io/steel-sonar-413417/backend:latest
-                ports:
-                  - containerPort: 80
-                env:
-                  - name: DATABASE_URL
-                    value: "pgsql://postgres:20050404iliA@postgres/monuments"
-                  - name: REDIS_HOST
-                    value: "redis"
-  - apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: postgres
+      labels:
+        app: multi-container-app
     spec:
-      replicas: 1
-      selector:
-        matchLabels:
-          app: postgres
-      template:
-        metadata:
-          labels:
-            app: postgres
-        spec:
-          containers:
-            - name: postgres
-              image: postgres
-              ports:
-                - containerPort: 5432
-              env:
-                - name: POSTGRES_DB
-                  value: monuments
-                - name: POSTGRES_USER
-                  value: postgres
-                - name: POSTGRES_PASSWORD
-                  value: 20050404iliA
-              volumeMounts:
-                - name: postgres-data
-                  mountPath: /var/lib/postgresql/data
-          volumes:
+      containers:
+        - name: backend
+          image: gcr.io/steel-sonar-413417/backend:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: DATABASE_URL
+              value: "pgsql://postgres:20050404iliA@postgres/monuments"
+            - name: REDIS_HOST
+              value: "redis"
+        - name: postgres
+          image: gcr.io/steel-sonar-413417/postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: monuments
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: 20050404iliA
+          volumeMounts:
             - name: postgres-data
-              emptyDir: { }
-  - apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: redis
-    spec:
-      replicas: 1
-      selector:
-        matchLabels:
-          app: redis
-      template:
-        metadata:
-          labels:
-            app: redis
-        spec:
-          containers:
-            - name: redis
-              image: redis
-              ports:
-                - containerPort: 6379
+              mountPath: /var/lib/postgresql/data
+        - name: redis
+          image: gcr.io/steel-sonar-413417/redis:latest
+          ports:
+            - containerPort: 6379
+      volumes:
+        - name: postgres-data
+          emptyDir: {}
