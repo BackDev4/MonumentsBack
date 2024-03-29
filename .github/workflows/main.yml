@@ -53,7 +53,6 @@ jobs:
 
       - name: Deploy to Google Kubernetes Engine
         run: |
-          ls -la
-          kubectl apply -f deploy.yaml
+          kubectl apply -f deployment.yaml
         env:
             GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
