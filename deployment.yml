@@ -16,7 +16,7 @@ spec:
         - name: backend
           image: gcr.io/steel-sonar-413417/backend:latest
           ports:
-            - containerPort: 80
+            - containerPort: 8080
           env:
             - name: DATABASE_URL
               value: "pgsql://postgres:20050404iliA@postgres/monuments"
