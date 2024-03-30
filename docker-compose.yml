@@ -7,7 +7,7 @@ services:
             dockerfile: Dockerfile
         image: gcr.io/steel-sonar-413417/backend:latest
         environment:
-            - DATABASE_URL=pgsql://postgres:20050404iliA@34.69.53.42/monuments
+            - DATABASE_URL=pgsql://postgres:20050404iliA@multi-container-app-service.monuments.svc.cluster.local/monuments
             - REDIS_HOST=redis
         ports:
             - "80:80"
