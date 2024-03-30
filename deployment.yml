@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: multi-container-app-service-2
+  name: multi-container-app-service
 spec:
   selector:
     app: multi-container-app
@@ -29,7 +29,7 @@ spec:
         - name: backend
           image: gcr.io/steel-sonar-413417/backend:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 80
           env:
             - name: DATABASE_URL
               value: "pgsql://postgres:20050404iliA@postgres/monuments"
