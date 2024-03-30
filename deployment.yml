@@ -32,7 +32,7 @@ spec:
             - containerPort: 80
           env:
             - name: DATABASE_URL
-              value: "pgsql://postgres:20050404iliA@multi-container-app-service.monuments.svc.cluster.local/monuments"
+              value: "pgsql://postgres:20050404iliA@0.0.0.0/monuments"
             - name: REDIS_HOST
               value: "redis"
         - name: postgres
