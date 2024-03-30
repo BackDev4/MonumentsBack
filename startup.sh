@@ -15,8 +15,7 @@ composer update
 php artisan migrate
 php artisan storage:link
 php artisan db:seed
-php artisan adminlte:install
-php artisan adminlte:update
+php artisan adminlte:install --only=main_views --force
 
 chmod -R 777 /app/storage
 
