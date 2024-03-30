@@ -7,7 +7,7 @@ spec:
     app: multi-container-app
   ports:
     - protocol: TCP
-      port: 443         # Порт, на котором будет доступно ваше приложение изнутри кластера
+      port: 80        # Порт, на котором будет доступно ваше приложение изнутри кластера
       targetPort: 80   # Порт вашего приложения, на который направлен трафик внутри пода
   type: LoadBalancer
 ---
@@ -55,4 +55,4 @@ spec:
             - containerPort: 6379
       volumes:
         - name: postgres-data
-          emptyDir: {}
+          emptyDir: { }
