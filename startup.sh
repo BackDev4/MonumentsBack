@@ -16,6 +16,7 @@ php artisan migrate
 php artisan storage:link
 php artisan db:seed
 php artisan adminlte:install
+php artisan adminlte:update
 
 chmod -R 777 /app/storage
 
