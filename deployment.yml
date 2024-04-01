@@ -33,32 +33,27 @@ roleRef:
   name: cert-manager-configmap-creator
   apiGroup: rbac.authorization.k8s.io
 ---
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: cert-manager-kube-system
-  namespace: kube-system
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: cert-manager-kube-system-configmap-creator
+  name: cert-manager-kube-system-serviceaccount-creator
 rules:
   - apiGroups: [""]
-    resources: ["configmaps"]
+    resources: ["serviceaccounts"]
     verbs: ["create"]
+    resourceNames: ["*"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: cert-manager-kube-system-configmap-creator-binding
+  name: cert-manager-kube-system-serviceaccount-creator-binding
 subjects:
-  - kind: ServiceAccount
-    name: cert-manager-kube-system
-    namespace: kube-system
+  - kind: User
+    name: 17257970297-compute@developer.gserviceaccount.com
+    apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: ClusterRole
-  name: cert-manager-kube-system-configmap-creator
+  name: cert-manager-kube-system-serviceaccount-creator
   apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: apps/v1
