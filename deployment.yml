@@ -14,32 +14,24 @@ metadata:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: cert-manager
+  name: cert-manager-configmap-creator
 rules:
   - apiGroups: [""]
-    resources: ["secrets"]
-    verbs: ["get", "create", "update"]
-  - apiGroups: [""]
-    resources: ["events"]
-    verbs: ["create", "update", "patch"]
-  - apiGroups: ["networking.k8s.io"]
-    resources: ["ingresses"]
-    verbs: ["get", "list", "watch"]
-  - apiGroups: [""]
-    resources: ["services"]
-    verbs: ["get"]
+    resources: ["configmaps"]
+    verbs: ["create"]
+    resourceNames: ["*"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: cert-manager-view-kube-system
+  name: cert-manager-configmap-creator
 subjects:
   - kind: ServiceAccount
     name: cert-manager
     namespace: cert-manager
 roleRef:
   kind: ClusterRole
-  name: view
+  name: cert-manager-configmap-creator
   apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: apps/v1
