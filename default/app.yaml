@@ -19,3 +19,6 @@ env_variables:
   DB_USERNAME: "postgres"
   DB_PASSWORD: "20050404iliA"
   REDIS_HOST: "redis"
+
+runtime_config:
+  document_root: public
