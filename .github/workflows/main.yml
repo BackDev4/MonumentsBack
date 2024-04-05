@@ -58,13 +58,8 @@ jobs:
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
 
-      - name: Deploy to Google Kubernetes Engine
+      - name: Deploy to Google App Engine
         run: |
-          gcloud components install kubectl
-          gcloud components install gke-gcloud-auth-plugin
-          gcloud container clusters get-credentials backend --zone us-central1 --project steel-sonar-413417
-          kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.0.3/cert-manager.crds.yaml
-          kubectl apply -f cert.yml --validate=false
-          kubectl apply -f deployment.yml --validate=false
+          gcloud app deploy deployment.yaml
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
