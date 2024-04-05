@@ -60,6 +60,6 @@ jobs:
 
       - name: Deploy to Google App Engine
         run: |
-          gcloud app deploy deployment.yaml
+          gcloud app deploy app.yml
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
