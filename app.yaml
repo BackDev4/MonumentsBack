@@ -1,0 +1,16 @@
+runtime: custom
+env: flex
+
+service: backend
+
+env_variables:
+  DATABASE_URL: "pgsql://postgres:password@localhost:5432/monuments"
+
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 5
+
+handlers:
+  - url: /.*
+    script: auto
+    secure: always
