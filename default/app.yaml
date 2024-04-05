@@ -1,16 +1,21 @@
 runtime: custom
 env: flex
 
-service: backend
+service: my-app
+
+resources:
+  cpu: 1
+  memory_gb: 1
+  disk_size_gb: 10
+
+network:
+  forwarded_ports:
+    - 80:80
 
 env_variables:
-  DATABASE_URL: "pgsql://postgres:password@localhost:5432/monuments"
-
-automatic_scaling:
-  min_num_instances: 1
-  max_num_instances: 5
-
-handlers:
-  - url: /.*
-    script: auto
-    secure: always
+  DB_CONNECTION: "pgsql"
+  DB_HOST: "pgsql://postgres:20050404iliA@0.0.0.0/monuments"  # Подставьте данные вашей Cloud SQL базы данных PostgreSQL
+  DB_DATABASE: "monuments"
+  DB_USERNAME: "postgres"
+  DB_PASSWORD: "20050404iliA"
+  REDIS_HOST: "redis"

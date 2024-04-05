@@ -61,6 +61,5 @@ jobs:
       - name: Deploy to Google App Engine
         run: |
           gcloud app deploy default/app.yaml
-          gcloud app deploy app.yaml
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
