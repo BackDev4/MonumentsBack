@@ -21,4 +21,4 @@ env_variables:
   REDIS_HOST: "redis"
 
 runtime_config:
-  document_root: public
+  document_root: .
