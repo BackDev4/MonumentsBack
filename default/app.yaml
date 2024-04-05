@@ -1,7 +1,7 @@
-runtime: custom
+runtime: php
 env: flex
 
-service: my-app
+service: default
 
 resources:
   cpu: 1
@@ -14,7 +14,7 @@ network:
 
 env_variables:
   DB_CONNECTION: "pgsql"
-  DB_HOST: "pgsql://postgres:20050404iliA@0.0.0.0/monuments"  # Подставьте данные вашей Cloud SQL базы данных PostgreSQL
+  DB_HOST: "pgsql://postgres:20050404iliA@0.0.0.0/monuments"
   DB_DATABASE: "monuments"
   DB_USERNAME: "postgres"
   DB_PASSWORD: "20050404iliA"
