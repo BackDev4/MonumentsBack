@@ -18,6 +18,8 @@ COPY . .
 COPY startup.sh /startup.sh
 RUN chmod +x /startup.sh
 
+ENV PORT=8080
+
 RUN composer install --no-dev
 
 CMD ["sh", "/startup.sh"]
