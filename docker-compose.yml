@@ -10,7 +10,7 @@ services:
             - DATABASE_URL=pgsql://postgres:20050404iliA@0.0.0.0/monuments
             - REDIS_HOST=redis
         ports:
-            - "8080:8080"
+            - "80:80"
         volumes:
             - .:/app
 
