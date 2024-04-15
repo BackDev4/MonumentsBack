@@ -60,8 +60,8 @@ jobs:
 
       - name: Deploy to Cloud Run
         run: |
-          gcloud run deploy backend --image gcr.io/steel-sonar-413417/backend:latest --platform managed --allow-unauthenticated
-          gcloud run deploy postgres --image gcr.io/steel-sonar-413417/postgres:latest --platform managed --allow-unauthenticated
-          gcloud run deploy redis --image gcr.io/steel-sonar-413417/redis:latest --platform managed --allow-unauthenticated
+          gcloud run deploy backend --image gcr.io/steel-sonar-413417/backend:latest --platform managed --allow-unauthenticated --region us-central1
+          gcloud run deploy postgres --image gcr.io/steel-sonar-413417/postgres:latest --platform managed --allow-unauthenticated --region us-central1
+          gcloud run deploy redis --image gcr.io/steel-sonar-413417/redis:latest --platform managed --allow-unauthenticated --region us-central1
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
