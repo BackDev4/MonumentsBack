@@ -18,8 +18,8 @@ jobs:
 
       - name: Deploy with Ansible
         run: |
-          ansible-playbook -i '185.112.102.43,' -u root playbook.yml --extra-vars "ansible_ssh_pass=9b665MbJMRpP"
+          ansible-playbook -i '185.112.102.43,' -u root deploy.yml --extra-vars "ansible_ssh_pass=9b665MbJMRpP"
 
-      - name: Build
-        run: |
-          cd / && docker-compose -f /MonumentsBack/docker-compose.yml up -d
+#      - name: Build
+#        run: |
+#          cd / && docker-compose -f /MonumentsBack/docker-compose.yml up -d
