@@ -22,4 +22,4 @@ jobs:
 
       - name: Build
         run: |
-          docker-compose -f /MonumentsBack/docker-compose.yml up -d
+          cd / && docker-compose -f /MonumentsBack/docker-compose.yml up -d
