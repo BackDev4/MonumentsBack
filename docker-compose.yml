@@ -5,7 +5,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        image: gcr.io/steel-sonar-413417/backend:latest
+        image: backend
         environment:
             - DATABASE_URL=pgsql://postgres:20050404iliA@0.0.0.0/monuments
             - REDIS_HOST=redis

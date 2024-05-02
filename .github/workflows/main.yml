@@ -1,4 +1,4 @@
-name: Deploy to Google Cloud via CI/CD
+name: CI/CD
 
 on:
   push:
@@ -6,62 +6,20 @@ on:
       - master
 
 jobs:
-  deploy:
+  build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Authenticate with Google Cloud
-        uses: google-github-actions/auth@v0.7.0
-        id: auth
-        with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
-          export_environment_variables: true
+      - name: Install Ansible
+        run: sudo apt-get update && sudo apt-get install -y ansible
 
-      - name: Set up Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v0.2.0
-        with:
-          project_id: steel-sonar-413417
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-          export_default_credentials: true
-
-      - name: Set credentials path
-        run: echo "::set-output name=GOOGLE_APPLICATION_CREDENTIALS_PATH::${{ steps.auth.outputs.credentials_file_path }}"
-        id: set_creds_path
-
-      - name: Build Docker images
+      - name: Deploy with Ansible
         run: |
-          docker-compose -f docker-compose.yml build --no-cache
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
+          ansible-playbook -i '185.112.102.43,' -u root --extra-vars "ansible_ssh_pass=9b665MbJMRpP"
 
-      - name: Configure Docker for Google Cloud authentication
+      - name: Build
         run: |
-          gcloud auth configure-docker
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
-
-      - name: Tag and push Docker images
-        run: |
-          docker pull postgres:latest
-          docker tag postgres:latest gcr.io/steel-sonar-413417/postgres:latest
-          docker push gcr.io/steel-sonar-413417/postgres:latest
-
-          docker pull redis:latest
-          docker tag redis:latest gcr.io/steel-sonar-413417/redis:latest
-          docker push gcr.io/steel-sonar-413417/redis:latest
-
-          docker tag gcr.io/steel-sonar-413417/backend:latest gcr.io/steel-sonar-413417/backend:latest
-          docker push gcr.io/steel-sonar-413417/backend:latest
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
-
-      - name: Deploy to Cloud Run
-        run: |
-          gcloud run deploy backend --image gcr.io/steel-sonar-413417/backend:latest --platform managed --allow-unauthenticated --region us-central1
-          gcloud run deploy postgres --image gcr.io/steel-sonar-413417/postgres:latest --platform managed --allow-unauthenticated --region us-central1
-          gcloud run deploy redis --image gcr.io/steel-sonar-413417/redis:latest --platform managed --allow-unauthenticated --region us-central1
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
+          docker-compose -f /MonumentsBack/docker-compose.yml up -d
