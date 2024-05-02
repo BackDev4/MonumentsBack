@@ -1,4 +1,0 @@
-- hosts: all
-  tasks:
-    - name: Build and deploy Docker container
-      command: docker-compose -f /path/to/project/docker-compose.yml up -d
