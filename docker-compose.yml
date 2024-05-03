@@ -8,26 +8,30 @@ services:
             dockerfile: Dockerfile
         image: backend
         environment:
-            - DATABASE_URL=pgsql://postgres:20050404iliA@0.0.0.0/monuments
+            - DATABASE_URL=pgsql://postgres@0.0.0.0/monuments
             - REDIS_HOST=redis
         ports:
             - "8080:8080"
         volumes:
             - .:/app
+        depends_on:
+            - postgres
 
-#    postgres:
-#        image: postgres
-#        restart: always
-#        environment:
-#            POSTGRES_DB: monuments
-#            POSTGRES_USER: postgres
-#            POSTGRES_PASSWORD: postgres
-#        volumes:
-#            - postgres-data:/var/lib/postgresql/data
-#
-#    redis:
-#        image: redis
-#        restart: always
-#
-#volumes:
-#    postgres-data:
+
+    postgres:
+        image: postgres
+        restart: always
+        environment:
+            POSTGRES_DB: monuments
+            POSTGRES_USER: postgres
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        command: ["postgres", "-c", "log_statement=all"]
+
+
+    redis:
+        image: redis
+        restart: always
+
+volumes:
+    postgres-data:
