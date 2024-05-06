@@ -11,7 +11,7 @@ services:
 #            - DATABASE_URL=0.0.0.0
             - REDIS_HOST=redis
         ports:
-            - "80:80"
+            - "8080:8080"
         volumes:
             - .:/app
 #        depends_on:
