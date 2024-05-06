@@ -23,6 +23,7 @@ RUN cp /app/.env.example /app/.env && \
     echo "DB_DATABASE=monuments" >> /app/.env && \
     echo "DB_USERNAME=postgres" >> /app/.env && \
     echo "DB_PASSWORD=20050404iliA" >> /app/.env && \
+    cat .env && \
     composer update && \
     php artisan migrate && \
     chmod -R 777 /app/storage
