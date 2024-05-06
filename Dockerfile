@@ -27,4 +27,4 @@ RUN cp /app/.env.example /app/.env && \
     php artisan migrate && \
     chmod -R 777 /app/storage
 
-CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;' && tail -f /dev/null"]
+CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;' & wait -n"]
