@@ -28,5 +28,5 @@ RUN cp /app/.env.example /app/.env && \
     php artisan migrate && \
     chmod -R 777 /app/storage
 
-php artisan serve --port=8080
+RUN php artisan serve --port=8080
 #CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
