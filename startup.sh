@@ -5,7 +5,7 @@ cp /app/.env.example /app/.env
 php artisan key:generate
 
 echo "DB_CONNECTION=pgsql" >> /app/.env
-echo "DB_HOST=0.0.0.0" >> /app/.env
+echo "DB_HOST=postgres" >> /app/.env
 echo "DB_PORT=5432" >> /app/.env
 echo "DB_DATABASE=monuments" >> /app/.env
 echo "DB_USERNAME=postgres" >> /app/.env
