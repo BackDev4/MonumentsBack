@@ -13,7 +13,7 @@ echo "DB_PASSWORD=20050404iliA" >> /app/.env
 
 composer update
 php artisan migrate
-php artisan storage:link
+#php artisan storage:link
 #php artisan db:seed
 
 chmod -R 777 /app/storage
