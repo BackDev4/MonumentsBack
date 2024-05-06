@@ -14,25 +14,25 @@ services:
             - "8080:8080"
         volumes:
             - .:/app
-#        depends_on:
-#            - postgres
+        depends_on:
+            - postgres
 
 
-#    postgres:
-#        image: postgres
-#        restart: always
-#        environment:
-#            POSTGRES_DB: monuments
-#            POSTGRES_USER: postgres
-#            POSTGRES_PASSWORD: 20050404iliA
-#        volumes:
-#            - postgres-data:/var/lib/postgresql/data
-#        command: ["postgres", "-c", "log_statement=all"]
-#
-#
-#    redis:
-#        image: redis
-#        restart: always
-#
-#volumes:
-#    postgres-data:
+    postgres:
+        image: postgres
+        restart: always
+        environment:
+            POSTGRES_DB: monuments
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: 20050404iliA
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        command: ["postgres", "-c", "log_statement=all"]
+
+
+    redis:
+        image: redis
+        restart: always
+
+volumes:
+    postgres-data:
