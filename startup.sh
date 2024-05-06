@@ -9,7 +9,7 @@ echo "DB_HOST=postgres" >> /app/.env
 echo "DB_PORT=5432" >> /app/.env
 echo "DB_DATABASE=monuments" >> /app/.env
 echo "DB_USERNAME=postgres" >> /app/.env
-#echo "DB_PASSWORD=" >> /app/.env
+echo "DB_PASSWORD=postgres" >> /app/.env
 
 composer update
 php artisan migrate
