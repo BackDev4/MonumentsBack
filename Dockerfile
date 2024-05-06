@@ -1,6 +1,6 @@
 FROM php:8.1-fpm-alpine
 
-RUN apk add --no-cache nginx wget postgresql-dev autoconf g++ make
+RUN apk add --no-cache nginx wget postgresql-dev autoconf g++ make supervisor
 
 RUN docker-php-ext-install pdo_pgsql && \
     pecl install redis && \
@@ -11,6 +11,7 @@ RUN wget http://getcomposer.org/composer.phar && \
     mv composer.phar /usr/local/bin/composer
 
 COPY nginx.conf /etc/nginx/nginx.conf
+COPY supervisord.conf /etc/supervisord.conf
 
 WORKDIR /app
 COPY . .
@@ -27,4 +28,4 @@ RUN cp /app/.env.example /app/.env && \
     php artisan migrate && \
     chmod -R 777 /app/storage
 
-CMD ["sh", "-c", "php-fpm -D && nginx -g & wait -n"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
