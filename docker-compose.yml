@@ -1,38 +1,38 @@
 version: '3.5'
 
 services:
-#    backend:
-#        container_name: backend
-#        build:
-#            context: .
-#            dockerfile: Dockerfile
-#        image: backend
-#        environment:
-#            - DATABASE_URL=postgres://postgres:root@postgres:5432/monuments
-#            - REDIS_HOST=redis
-#        ports:
-#            - "8080:8080"
-#        volumes:
-#            - .:/app
+    backend:
+        container_name: backend
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: backend
+        environment:
+            - DATABASE_URL=postgres://postgres:root@postgres:5432/monuments
+            - REDIS_HOST=redis
+        ports:
+            - "8080:8080"
+        volumes:
+            - .:/app
 #        depends_on:
 #            - postgres
 
-    postgres:
-        container_name: postgres
-        image: postgres
-        restart: always
-        environment:
-            POSTGRES_DB: monuments
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: root
-        volumes:
-            - postgres-data:/var/lib/postgresql/data
-        command: ["postgres", "-c", "log_statement=all"]
-
-    redis:
-        container_name: redis
-        image: redis
-        restart: always
-
-volumes:
-    postgres-data:
+#    postgres:
+#        container_name: postgres
+#        image: postgres
+#        restart: always
+#        environment:
+#            POSTGRES_DB: monuments
+#            POSTGRES_USER: postgres
+#            POSTGRES_PASSWORD: root
+#        volumes:
+#            - postgres-data:/var/lib/postgresql/data
+#        command: ["postgres", "-c", "log_statement=all"]
+#
+#    redis:
+#        container_name: redis
+#        image: redis
+#        restart: always
+#
+#volumes:
+#    postgres-data:
