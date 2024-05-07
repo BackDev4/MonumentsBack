@@ -23,7 +23,6 @@ RUN cp /app/.env.example /app/.env && \
     sed -i 's/^DB_DATABASE=laravel/DB_DATABASE=monuments/' /app/.env && \
     sed -i 's/^DB_USERNAME=root/DB_USERNAME=postgres/' /app/.env && \
     sed -i 's/^DB_PASSWORD=/DB_PASSWORD=root/' /app/.env && \
-    cat .env && \
     composer update && \
     php artisan migrate && \
     php artisan db:seed && \
