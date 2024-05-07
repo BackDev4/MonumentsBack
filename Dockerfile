@@ -27,6 +27,6 @@ RUN cp /app/.env.example /app/.env && \
 #    composer update && \
 #    php artisan migrate && \
 #    php artisan db:seed && \
-#    chmod -R 777 /app/storage
+    chmod -R 777 /app/storage
 
 CMD ["sh", "-c", "php-fpm -D && nginx -g"]
