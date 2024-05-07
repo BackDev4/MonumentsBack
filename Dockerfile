@@ -28,4 +28,4 @@ RUN cp /app/.env.example /app/.env && \
     php artisan db:seed && \
     chmod -R 777 /app/storage
 
-CMD ["sh", "-c", "php-fpm -D && nginx && tail -f /dev/null"]
+CMD php artisan serve --host=0.0.0.0 --port=8080
