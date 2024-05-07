@@ -17,8 +17,8 @@ services:
         depends_on:
             - postgres
 
-
     postgres:
+        container_name: postgres
         image: postgres
         restart: always
         environment:
@@ -29,8 +29,8 @@ services:
             - postgres-data:/var/lib/postgresql/data
         command: ["postgres", "-c", "log_statement=all"]
 
-
     redis:
+        container_name: redis
         image: redis
         restart: always
 
