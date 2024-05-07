@@ -22,10 +22,11 @@ RUN cp /app/.env.example /app/.env && \
     sed -i 's/^DB_PORT=3306/DB_PORT=5432/' /app/.env && \
     sed -i 's/^DB_DATABASE=laravel/DB_DATABASE=monuments/' /app/.env && \
     sed -i 's/^DB_USERNAME=root/DB_USERNAME=postgres/' /app/.env && \
-    sed -i 's/^DB_PASSWORD=/DB_PASSWORD=root/' /app/.env && \
+    sed -i 's/^DB_PASSWORD=/DB_PASSWORD=20050404iliA/' /app/.env && \
     cat .env && \
     composer update && \
     php artisan migrate && \
+    php artisan db:seed && \
     chmod -R 777 /app/storage
 
 CMD ["sh", "-c", "php-fpm -D && nginx -g"]
