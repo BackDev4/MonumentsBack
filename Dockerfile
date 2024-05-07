@@ -18,7 +18,7 @@ COPY . .
 RUN cp /app/.env.example /app/.env && \
     php artisan key:generate && \
     sed -i 's/^DB_CONNECTION=mysql/DB_CONNECTION=pgsql/' /app/.env && \
-    sed -i 's/^DB_HOST=127.0.0.1/DB_HOST=postgres/' /app/.env && \
+    sed -i 's/^DB_HOST=127.0.0.1/DB_HOST=0.0.0.0/' /app/.env && \
     sed -i 's/^DB_PORT=3306/DB_PORT=5432/' /app/.env && \
     sed -i 's/^DB_DATABASE=laravel/DB_DATABASE=monuments/' /app/.env && \
     sed -i 's/^DB_USERNAME=root/DB_USERNAME=postgres/' /app/.env && \
