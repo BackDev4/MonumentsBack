@@ -29,4 +29,4 @@ RUN cp /app/.env.example /app/.env && \
 #    php artisan db:seed && \
     chmod -R 777 /app/storage
 
-CMD ["sh", "-c", "php-fpm -D && nginx -g"]
+CMD ["sh", "-c", "php-fpm -D && nginx"]
