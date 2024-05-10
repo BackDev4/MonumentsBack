@@ -8,7 +8,7 @@ services:
             dockerfile: Dockerfile
         image: backend
         environment:
-            - DATABASE_URL=postgres://postgres:root@postgres:5432/monuments
+#            - DATABASE_URL=0.0.0.0
             - REDIS_HOST=redis
         ports:
             - "8080:8080"
