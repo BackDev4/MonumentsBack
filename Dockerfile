@@ -23,8 +23,8 @@ RUN cp /app/.env.example /app/.env && \
     sed -i 's/^DB_PASSWORD=/DB_PASSWORD=root/' /app/.env && \
     cat .env && \
     composer update && \
-    php artisan migrate && \
-    php artisan db:seed && \
+#    php artisan migrate && \
+#    php artisan db:seed && \
     chmod -R 777 /app/storage
 
 CMD php artisan serve --host=0.0.0.0 --port=8080
