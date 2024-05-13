@@ -2,9 +2,7 @@ FROM php:8.1-fpm-alpine
 
 RUN apk add --no-cache nginx wget postgresql-dev autoconf g++ make
 
-RUN docker-php-ext-install pdo_pgsql && \
-    pecl install redis && \
-    docker-php-ext-enable redis
+RUN docker-php-ext-install pdo_mysql
 
 RUN wget http://getcomposer.org/composer.phar && \
     chmod a+x composer.phar && \
