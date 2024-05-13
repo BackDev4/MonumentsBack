@@ -1,6 +1,6 @@
 FROM php:8.1-fpm-alpine
 
-RUN apk add --no-cache nginx wget postgresql-dev autoconf g++ make
+RUN apk add --no-cache nginx wget mysql-client autoconf g++ make
 
 RUN docker-php-ext-install pdo_mysql
 
